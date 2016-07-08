@@ -1,4 +1,5 @@
 import os
+import platform
 
 from tkinter import filedialog, messagebox, Frame
 
@@ -8,8 +9,14 @@ import linecache
 filePrefix = "JHNM:"
 
 def chooseDirectory():
+    system = platform.system()
+    print("Sys=" + system)
+    if (system == "darwin"):
+        baseDir = "~/GitHub/."
+    else:
+        baseDir = "C:/MyWorkspaces/git/." 
     dirname = filedialog.askdirectory(parent=tkinter.Tk(), 
-                                      initialdir="C:/My_Workspaces/MyJava/TaskLogger",
+                                      initialdir=baseDir, 
                                       title='Please select a directory')
     return(dirname)
     
@@ -62,14 +69,9 @@ def chooseFile():
             
     
 def importFiles():
-#     messagebox.showerror("Import", "Basic.")
     chooseFile()
 
 def exportFiles():
-#     if messagebox.askyesno('Verify', 'Really quit?'):
-#         messagebox.showwarning('Yes', 'Not yet implemented')
-#     else:
-#         messagebox.showinfo('No', 'Quit has been cancelled')
     dirName = chooseDirectory()
     createFileList(dirName)
     
